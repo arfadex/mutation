@@ -1,0 +1,55 @@
+INSERT INTO regions (idRegion, nomRegion)
+VALUES
+  (1, 'Tanger-Tétouan-Al Hoceïma'),
+  (2, 'L''Oriental'),
+  (3, 'Fès-Meknès'),
+  (4, 'Rabat-Salé-Kénitra'),
+  (5, 'Béni Mellal-Khénifra'),
+  (6, 'Casablanca-Settat'),
+  (7, 'Marrakech-Safi'),
+  (8, 'Drâa-Tafilalet'),
+  (9, 'Souss-Massa'),
+  (10, 'Guelmim-Oued Noun'),
+  (11, 'Laâyoune-Sakia El Hamra'),
+  (12, 'Dakhla-Oued Ed-Dahab');
+
+
+INSERT INTO academies (idAcademie, nomAcademie, idRegion)
+VALUES
+  (1, 'Académie Royale des Beaux-Arts', 1),
+  (2, 'Académie Royale Militaire', 1),
+  (3, 'Académie Internationale Mohammed VI de l''Aviation Civile', 2),
+  (4, 'Académie Internationale Mohammed VI de l''Hôtellerie', 3),
+  (5, 'Académie Internationale Mohammed VI de la Logistique', 4),
+  (6, 'Académie Internationale Mohammed VI de l''Énergie Nucléaire et des Énergies Renouvelables', 5),
+  (7, 'Académie Royale de Police', 6),
+  (8, 'Académie Royale de l''Armée de Terre', 7),
+  (9, 'Académie Royale de l''Air', 8),
+  (10, 'Académie Royale de la Marine', 8),
+  (11, 'Académie des Sciences, Techniques et Management', 9),
+  (12, 'Académie Marocaine des Études Diplomatiques', 10),
+  (13, 'Académie Hassan II des Sciences et Techniques', 10),
+  (14, 'Académie Mohammed VI de Formation des Imams, Morchidines et Morchidates', 11),
+  (15, 'Académie Mohammed VI de Football', 12);
+
+
+INSERT INTO lycees (nomLycee, ville, idAcademie)
+VALUES
+  ('Lycée des Beaux-Arts', 'Casablanca', 1),
+  ('Lycée de la Peinture', 'Rabat', 1),
+  ('Lycée Militaire', 'Meknès', 2),
+  ('Lycée de l''Aviation', 'Casablanca', 3),
+  ('Lycée de l''Hôtellerie', 'Marrakech', 4),
+  ('Lycée de la Logistique', 'Tangier', 5),
+  ('Lycée de l''Énergie Nucléaire', 'Rabat', 6),
+  ('Lycée de la Police', 'Casablanca', 7),
+  ('Lycée Militaire Terrestre', 'Marrakech', 8),
+  ('Lycée de l''Air', 'Salé', 9),
+  ('Lycée de l''Aviation Militaire', 'Meknès', 9),
+  ('Lycée de la Marine', 'Casablanca', 10),
+  ('Lycée des Sciences', 'Fès', 11),
+  ('Lycée des Techniques', 'Casablanca', 11),
+  ('Lycée Diplomatique', 'Rabat', 12),
+  ('Lycée des Sciences et Techniques', 'Casablanca', 13),
+  ('Lycée des Imams', 'Rabat', 14),
+  ('Lycée du Football', 'Marrakech', 15);
