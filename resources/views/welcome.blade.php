@@ -4,176 +4,456 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Système de gestion des demandes de mutation des enseignants">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#0f172a">
 
     <title>Mutation - Système de Mutation des Enseignants</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    
+    <link href="https://fonts.bunny.net/css?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        :root {
+            color-scheme: dark;
+            --primary: #38bdf8;
+            --primary-soft: rgba(56, 189, 248, 0.18);
+            --primary-strong: rgba(56, 189, 248, 0.35);
+            --surface: rgba(15, 23, 42, 0.78);
+            --surface-strong: rgba(15, 23, 42, 0.92);
+            --border: rgba(148, 163, 184, 0.35);
+            --muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0d1b2a 0%, #1a2332 50%, #2d3748 100%);
+            background: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12), transparent 45%),
+                        radial-gradient(circle at 85% 10%, rgba(129, 140, 248, 0.12), transparent 40%),
+                        linear-gradient(135deg, #0b1120 0%, #0f172a 40%, #111827 100%);
+            color: #e2e8f0;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        
-        .hero-section {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(93, 208, 255, 0.1), rgba(13, 27, 42, 0.3));
+
+        main {
+            flex: 1;
         }
-        
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #5dd0ff, #ffffff);
+
+        a {
+            text-decoration: none;
+        }
+
+        .text-muted {
+            color: var(--muted) !important;
+        }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.88) !important;
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar-brand {
+            font-size: 1.55rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: #cbd5e0;
-            margin-bottom: 2rem;
+
+        .navbar .nav-link {
+            color: rgba(226, 232, 240, 0.78) !important;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
-        
-        .feature-card {
-            background: rgba(26, 35, 50, 0.8);
-            border: 1px solid rgba(93, 208, 255, 0.2);
-            border-radius: 1rem;
+
+        .navbar .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-1px);
+        }
+
+        .navbar-toggler {
+            border: 1px solid var(--border);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.1rem var(--primary-strong);
+        }
+
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            padding: 9rem 0 6rem;
+        }
+
+        .hero-section::before,
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(80px);
+            opacity: 0.55;
+        }
+
+        .hero-section::before {
+            width: 380px;
+            height: 380px;
+            top: -120px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 65%);
+        }
+
+        .hero-section::after {
+            width: 420px;
+            height: 420px;
+            bottom: -200px;
+            left: -160px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.28), transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--primary-soft);
+            color: var(--primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(2.75rem, 5vw, 4.25rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-top: 1.5rem;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 60%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(226, 232, 240, 0.76);
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            gap: 1rem;
+        }
+
+        .btn {
+            border-radius: 0.9rem;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            border: none;
+            box-shadow: 0 18px 40px rgba(14, 165, 233, 0.25);
+            color: #0b1120;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.35);
+            background: linear-gradient(135deg, #5ecff8, #22d3ee);
+            color: #082f49;
+        }
+
+        .btn-outline-light {
+            border: 1px solid var(--border);
+            color: #e2e8f0;
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(226, 232, 240, 0.08);
+            border-color: rgba(226, 232, 240, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .hero-highlights {
+            margin-top: 1.5rem;
+        }
+
+        .highlight-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.6);
+            font-size: 0.95rem;
+            color: rgba(226, 232, 240, 0.8);
+        }
+
+        .highlight-pill i {
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: 1.5rem;
+            max-width: 420px;
+            margin: 3rem auto 0;
+        }
+
+        .hero-visual .hero-glow {
+            position: absolute;
+            inset: -20%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 65%);
+            filter: blur(60px);
+            z-index: 1;
+        }
+
+        .glass-card {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.65));
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
             padding: 2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 60px rgba(2, 6, 23, 0.45);
+            backdrop-filter: blur(18px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(93, 208, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(93, 208, 255, 0.1);
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-strong);
         }
-        
-        .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            background: linear-gradient(135deg, #5dd0ff, #1b98e0);
+
+        .glass-card .icon {
+            width: 3.25rem;
+            height: 3.25rem;
             border-radius: 1rem;
-            display: flex;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.45));
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: white;
+            color: #38bdf8;
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #5dd0ff, #1b98e0);
-            border: none;
-            border-radius: 0.75rem;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(93, 208, 255, 0.3);
-        }
-        
-        .btn-outline-light {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 0.75rem;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-light:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-        
-        .navbar {
-            background: rgba(13, 27, 42, 0.9) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(93, 208, 255, 0.2);
-        }
-        
-        .navbar-brand {
-            font-size: 1.5rem;
+
+        .glass-card h5 {
             font-weight: 700;
-            color: #5dd0ff !important;
+            margin-bottom: 0.75rem;
         }
-        
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8) !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
+
+        .glass-card p {
+            margin-bottom: 0;
+            color: rgba(226, 232, 240, 0.7);
         }
-        
-        .nav-link:hover {
-            color: #5dd0ff !important;
+
+        .glass-card.secondary {
+            margin-left: auto;
+            margin-top: -1.25rem;
         }
-        
+
         .stats-section {
-            background: rgba(26, 35, 50, 0.5);
-            border-top: 1px solid rgba(93, 208, 255, 0.2);
-            border-bottom: 1px solid rgba(93, 208, 255, 0.2);
+            padding: 4.5rem 0;
+            background: rgba(15, 23, 42, 0.55);
+            border-block: 1px solid var(--border);
         }
-        
-        .stat-item {
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid var(--border);
+            border-radius: 1.1rem;
+            padding: 1.8rem;
             text-align: center;
-            padding: 2rem 1rem;
+            box-shadow: 0 18px 40px rgba(2, 6, 23, 0.35);
         }
-        
-        .stat-number {
+
+        .stat-card .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(148, 163, 184, 0.85);
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-card .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #5dd0ff;
-            display: block;
+            color: #f8fafc;
         }
-        
-        .stat-label {
-            color: #cbd5e0;
-            font-size: 0.9rem;
-            font-weight: 500;
+
+        .section-intro .section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--primary-soft);
+            font-weight: 600;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: clamp(2.1rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
+        .section-subtitle {
+            color: rgba(226, 232, 240, 0.7);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.65));
+            border: 1px solid var(--border);
+            border-radius: 1.2rem;
+            padding: 2rem;
+            height: 100%;
+            box-shadow: 0 22px 40px rgba(2, 6, 23, 0.35);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-strong);
+            box-shadow: 0 30px 60px rgba(14, 165, 233, 0.22);
+        }
+
+        .feature-icon {
+            width: 3.3rem;
+            height: 3.3rem;
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(14, 165, 233, 0.55));
+            color: #38bdf8;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        #about {
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .about-card {
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 24px 48px rgba(2, 6, 23, 0.4);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.85rem;
+            color: rgba(226, 232, 240, 0.78);
+        }
+
+        .checklist li i {
+            color: var(--primary);
+        }
+
+        .about-visual {
+            margin-top: 0;
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.78);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-badge {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 0.9rem;
+            background: rgba(56, 189, 248, 0.18);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (min-width: 992px) {
+            .hero-visual {
+                margin: 0 0 0 auto;
+            }
+
+            .hero-section {
+                padding: 10rem 0 7rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <i class="fas fa-graduation-cap me-2"></i>
                 Mutation
             </a>
-            
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Fonctionnalités</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">À propos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt me-1"></i> Connexion
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a class="btn btn-primary" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            Connexion
                         </a>
                     </li>
                 </ul>
@@ -181,212 +461,250 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <h1 class="hero-title mb-4">
-                            Système de Mutation des Enseignants
-                        </h1>
-                        <p class="hero-subtitle">
-                            Simplifiez la gestion des demandes de mutation avec notre plateforme moderne et intuitive. 
-                            Gérez efficacement les transferts d'enseignants entre établissements.
-                        </p>
-                        <div class="d-flex flex-wrap gap-3">
-                            <a href="{{ route('login') }}" class="btn btn-primary btn-lg">
-                                <i class="fas fa-sign-in-alt me-2"></i>
-                                Se connecter
-                            </a>
-                            <a href="#features" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-info-circle me-2"></i>
-                                En savoir plus
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="text-center">
-                        <div class="feature-icon mx-auto mb-4">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <div class="feature-card h-100">
-                                    <i class="fas fa-mobile-alt feature-icon mx-auto"></i>
-                                    <h5 class="text-white">Mobile First</h5>
-                                    <p class="text-muted small">Interface optimisée pour tous les appareils</p>
-                                </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <span class="hero-tag">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                                Plateforme 360°
+                            </span>
+                            <h1 class="hero-title">
+                                Gérez les mutations d'enseignants sans friction
+                            </h1>
+                            <p class="hero-description mb-4">
+                                Une solution élégante et puissante pour planifier, suivre et valider les mutations des
+                                enseignants à l'échelle régionale. Chaque étape est guidée pour offrir une expérience
+                                claire et sécurisée aux équipes académiques.
+                            </p>
+                            <div class="d-flex flex-wrap hero-actions">
+                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-arrow-right me-2"></i>
+                                    Se connecter
+                                </a>
+                                <a href="#features" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-circle-info me-2"></i>
+                                    Découvrir la plateforme
+                                </a>
                             </div>
-                            <div class="col-6">
-                                <div class="feature-card h-100">
-                                    <i class="fas fa-moon feature-icon mx-auto"></i>
-                                    <h5 class="text-white">Mode Sombre</h5>
-                                    <p class="text-muted small">Interface moderne et confortable</p>
-                                </div>
+                            <div class="hero-highlights d-flex flex-wrap gap-3">
+                                <span class="highlight-pill">
+                                    <i class="fas fa-shield-check"></i>
+                                    Processus sécurisé
+                                </span>
+                                <span class="highlight-pill">
+                                    <i class="fas fa-bolt"></i>
+                                    Flux automatisés
+                                </span>
+                                <span class="highlight-pill">
+                                    <i class="fas fa-chart-line"></i>
+                                    Statistiques claires
+                                </span>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="hero-visual">
+                            <div class="hero-glow"></div>
+                            <div class="glass-card primary">
+                                <div class="icon">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <h5>Parcours simplifié</h5>
+                                <p>Centralisez les demandes et suivez chaque étape depuis un tableau de bord unifié et intuitif.</p>
+                            </div>
+                            <div class="glass-card secondary">
+                                <div class="icon">
+                                    <i class="fas fa-gauge-high"></i>
+                                </div>
+                                <h5>Vision en temps réel</h5>
+                                <p>Visualisez la disponibilité des établissements et les priorités en quelques secondes.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-number">12</span>
-                        <span class="stat-label">Régions</span>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-6 col-lg-3">
+                        <div class="stat-card">
+                            <span class="stat-label">Régions connectées</span>
+                            <span class="stat-number">12</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-number">34</span>
-                        <span class="stat-label">Académies</span>
+                    <div class="col-6 col-lg-3">
+                        <div class="stat-card">
+                            <span class="stat-label">Académies actives</span>
+                            <span class="stat-number">34</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-number">48</span>
-                        <span class="stat-label">Lycées</span>
+                    <div class="col-6 col-lg-3">
+                        <div class="stat-card">
+                            <span class="stat-label">Établissements suivis</span>
+                            <span class="stat-number">48</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Sécurisé</span>
+                    <div class="col-6 col-lg-3">
+                        <div class="stat-card">
+                            <span class="stat-label">Disponibilité système</span>
+                            <span class="stat-number">100%</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="text-white mb-3">Fonctionnalités Principales</h2>
-                    <p class="text-muted">Une plateforme complète pour la gestion des mutations</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-shield"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Authentification Sécurisée</h5>
-                        <p class="text-muted">Système de connexion sécurisé avec gestion des rôles pour enseignants et administrateurs.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Gestion des Demandes</h5>
-                        <p class="text-muted">Créez et suivez vos demandes de mutation avec un système de priorité pour les lycées.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Tableau de Bord Admin</h5>
-                        <p class="text-muted">Interface d'administration complète avec statistiques et gestion des demandes.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Application Mobile</h5>
-                        <p class="text-muted">PWA installable sur mobile avec support offline et notifications.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-palette"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Mode Sombre</h5>
-                        <p class="text-muted">Interface moderne avec basculement entre mode clair et sombre.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card h-100">
-                        <div class="feature-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h5 class="text-white mb-3">Performance</h5>
-                        <p class="text-muted">Application rapide et optimisée avec Laravel 12 et technologies modernes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="text-white mb-4">À propos du système</h2>
-                    <p class="text-muted mb-4">
-                        Notre système de mutation des enseignants a été conçu pour simplifier et moderniser 
-                        la gestion des demandes de transfert entre établissements scolaires. 
+        <!-- Features Section -->
+        <section id="features" class="py-5">
+            <div class="container">
+                <div class="section-intro text-center mb-5">
+                    <span class="section-pill">
+                        <i class="fas fa-sparkles"></i>
+                        Fonctionnalités clés
+                    </span>
+                    <h2 class="section-title">Une plateforme unifiée pour toutes vos mutations</h2>
+                    <p class="section-subtitle">
+                        De la demande initiale à la validation finale, Mutation combine automatisation, visibilité et
+                        sécurité pour fluidifier le parcours de chaque enseignant.
                     </p>
-                    <p class="text-muted mb-4">
-                        Avec une interface intuitive, un système de rôles sécurisé et des fonctionnalités 
-                        avancées, nous offrons une solution complète pour les enseignants et les administrateurs.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="{{ route('login') }}" class="btn btn-primary">
-                            <i class="fas fa-play me-2"></i>
-                            Commencer
-                        </a>
-                        <a href="#features" class="btn btn-outline-light">
-                            <i class="fas fa-arrow-up me-2"></i>
-                            Voir les fonctionnalités
-                        </a>
-                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="text-center">
-                        <div class="feature-icon mx-auto mb-4" style="width: 6rem; height: 6rem; font-size: 2.5rem;">
-                            <i class="fas fa-graduation-cap"></i>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Authentification sécurisée</h5>
+                            <p>Connexion multi-rôles, gestion des permissions et journalisation complète de chaque action.</p>
                         </div>
-                        <h4 class="text-white mb-3">Développé avec Laravel 12</h4>
-                        <p class="text-muted">
-                            Utilisant les dernières technologies web pour une expérience utilisateur optimale.
-                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Gestion des demandes</h5>
+                            <p>Créez, priorisez et suivez les demandes de mutation avec une traçabilité totale.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Tableau de bord décisionnel</h5>
+                            <p>Visualisez les indicateurs clés pour prendre des décisions rapides et alignées avec les objectifs.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-gears"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Automatisation intelligente</h5>
+                            <p>Des workflows configurables qui s'ajustent aux règles académiques et aux priorités locales.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Interface moderne</h5>
+                            <p>Une expérience claire et immersive, conçue pour rester confortable même lors de longues sessions.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h5 class="text-white mb-3">Performance optimale</h5>
+                            <p>Laravel 12 et Vite assurent une application rapide, réactive et évolutive.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="about-card">
+                            <h2 class="section-title text-start">Pensé pour les équipes académiques</h2>
+                            <p class="text-muted mb-4">
+                                Notre système de mutation des enseignants simplifie la coordination entre rectorats,
+                                académies et établissements. Les interfaces sont conçues pour guider les utilisateurs
+                                à chaque étape tout en garantissant la conformité réglementaire.
+                            </p>
+                            <ul class="checklist mb-4">
+                                <li><i class="fas fa-check"></i> Processus personnalisables selon vos règles locales</li>
+                                <li><i class="fas fa-check"></i> Notifications ciblées pour ne manquer aucune échéance</li>
+                                <li><i class="fas fa-check"></i> Historique complet des décisions et validations</li>
+                            </ul>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="{{ route('login') }}" class="btn btn-primary">
+                                    <i class="fas fa-play me-2"></i>
+                                    Commencer
+                                </a>
+                                <a href="#features" class="btn btn-outline-light">
+                                    <i class="fas fa-arrow-up-right-from-square me-2"></i>
+                                    Voir les fonctionnalités
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-visual about-visual">
+                            <div class="hero-glow"></div>
+                            <div class="glass-card primary">
+                                <div class="icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h5>Architecture moderne</h5>
+                                <p>Développé sur Laravel 12 et Vite pour offrir stabilité, sécurité et évolutivité.</p>
+                            </div>
+                            <div class="glass-card secondary">
+                                <div class="icon">
+                                    <i class="fas fa-users-gear"></i>
+                                </div>
+                                <h5>Rôles personnalisés</h5>
+                                <p>Adaptez les permissions aux besoins de chaque académie et établissement scolaire.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-5 border-top border-secondary">
+    <footer class="py-5 mt-5">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center g-4">
                 <div class="col-md-6">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-graduation-cap me-2 text-primary"></i>
-                        <span class="fw-bold text-white">Mutation</span>
-                        <span class="text-muted ms-2">- Système de Mutation des Enseignants</span>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="footer-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <span class="fw-bold text-white">Mutation</span>
+                            <div class="text-muted">Système de mutation des enseignants</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small class="text-muted">
-                        &copy; {{ date('Y') }} Tous droits réservés. Développé avec ❤️ en Laravel 12
+                        &copy; {{ date('Y') }} Tous droits réservés. Développé avec ❤️ en Laravel 12.
                     </small>
                 </div>
             </div>
@@ -395,18 +713,21 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Smooth scrolling -->
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
