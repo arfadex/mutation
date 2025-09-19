@@ -1,59 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{{ asset('jquery.js') }}"></script>
+@extends('layouts.app')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    <nav class="navbar navbar-expand-md navbar-dark text-white shadow-sm" style="background-color: black;">
-        <div class="container">
-            <a class="navbar-brand" style="font-size: 20px;" href="{{ url('home') }}">
-                Mutation 
-            </a>
-        </div>
-    </nav>
-</head>
-<body>
+@section('content')
+<section class="page-section">
     <div class="container">
-        <h1 class="text-center mt-4">Test Service</h1>
-        <form id="demandeForm" action="{{ route('demande.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="username" class="mb-4 h4">Identifiant :</label>
-                <input type="text" id="username" class="form-control-lg">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+                        <div>
+                            <span class="badge badge-soft-dark mb-2">Service en ligne</span>
+                            <h1 class="h3 mb-2">Testez le service de suivi</h1>
+                            <p class="text-muted mb-0">Interrogez en direct le nombre de demandes de mutation associées à un identifiant.</p>
+                        </div>
+                        <a href="{{ route('home') }}" class="btn btn-outline-dark">Retour à l'accueil</a>
+                    </div>
+                    <form id="demandeForm" class="row g-3 align-items-end">
+                        @csrf
+                        <div class="col-md-8">
+                            <label for="username" class="form-label fw-semibold">Identifiant</label>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Ex.&nbsp;: AGT5479" required>
+                            <div class="form-text">Renseignez l'identifiant de l'agent pour obtenir un aperçu instantané.</div>
+                        </div>
+                        <div class="col-md-4 d-grid">
+                            <button type="button" onclick="getDemandesCount()" class="btn btn-dark btn-lg">Nombre de mutations</button>
+                        </div>
+                    </form>
+                    <div id="demandes_count" class="alert alert-secondary d-none mt-4" role="alert"></div>
+                    <p class="small text-muted mb-0">Les données sont issues des enregistrements en temps réel et peuvent varier selon les dernières saisies.</p>
+                </div>
             </div>
-            <button type="button" onclick="getDemandesCount()" class="btn btn-primary mt-4 bg-dark">Nombre de mutations</button>
-        </form>
-        <p id="demandes_count" class="mt-3"></p>
+        </div>
     </div>
+</section>
+@endsection
 
+@push('scripts')
     <script>
         function getDemandesCount() {
-            var username = document.getElementById('username').value;
+            const username = document.getElementById('username').value.trim();
+            const messageBox = document.getElementById('demandes_count');
+
+            if (!username) {
+                messageBox.textContent = 'Veuillez indiquer un identifiant avant de lancer la recherche.';
+                messageBox.classList.remove('d-none', 'alert-success', 'alert-danger');
+                messageBox.classList.add('alert-warning');
+                return;
+            }
+
+            messageBox.classList.remove('d-none', 'alert-warning', 'alert-danger');
+            messageBox.classList.add('alert-secondary');
+            messageBox.textContent = 'Analyse en cours…';
+
             $.ajax({
-                url: '/demandes/user/' + username,
+                url: '/demandes/user/' + encodeURIComponent(username),
                 type: 'GET',
                 success: function(response) {
-                    var demandesCount = response.demandes_count;
-                    document.getElementById('demandes_count').innerHTML = "<span class='h5'>Nombre de demandes de mutations : " + demandesCount + "</span>";
+                    const demandesCount = response.demandes_count;
+                    messageBox.classList.remove('alert-secondary', 'alert-warning', 'alert-danger');
+                    messageBox.classList.add('alert-success');
+                    messageBox.innerHTML = "<strong>Résultat :</strong> " + demandesCount + " demande(s) de mutation associée(s) à cet identifiant.";
                 },
                 error: function() {
-                    document.getElementById('demandes_count').innerHTML = "Une erreur s'est produite lors de la récupération du nombre de demandes.";
+                    messageBox.classList.remove('alert-secondary', 'alert-warning', 'alert-success');
+                    messageBox.classList.add('alert-danger');
+                    messageBox.textContent = "Une erreur s'est produite lors de la récupération du nombre de demandes. Réessayez plus tard.";
                 }
             });
         }
     </script>
-</body>
-</html>
+@endpush
