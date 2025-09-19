@@ -20,42 +20,52 @@ class DemandeSeeder extends Seeder
             [
                 'dateDem' => Carbon::now()->subDays(30),
                 'idProfesseur' => 1,
+                'status' => 'pending',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(25),
                 'idProfesseur' => 2,
+                'status' => 'approved',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(20),
                 'idProfesseur' => 3,
+                'status' => 'pending',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(15),
                 'idProfesseur' => 4,
+                'status' => 'rejected',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(10),
                 'idProfesseur' => 5,
+                'status' => 'pending',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(8),
                 'idProfesseur' => 6,
+                'status' => 'approved',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(5),
                 'idProfesseur' => 7,
+                'status' => 'pending',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(3),
                 'idProfesseur' => 8,
+                'status' => 'pending',
             ],
             [
                 'dateDem' => Carbon::now()->subDays(1),
                 'idProfesseur' => 9,
+                'status' => 'approved',
             ],
             [
                 'dateDem' => Carbon::now(),
                 'idProfesseur' => 10,
+                'status' => 'pending',
             ],
         ];
 

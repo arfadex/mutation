@@ -151,5 +151,21 @@ class UserSeeder extends Seeder
         foreach ($users as $user) {
             User::create($user);
         }
+
+        // Create admin user
+        User::create([
+            'nom' => 'Admin',
+            'prenom' => 'Système',
+            'email' => 'admin@mutation.ma',
+            'dateN' => '1980-01-01',
+            'dateAffLycee' => '2000-09-01',
+            'etatCivil' => 'Marié',
+            'nEnfants' => 2,
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
+            'points' => 0,
+            'idLycee' => 1,
+            'is_admin' => 1,
+        ]);
     }
 }

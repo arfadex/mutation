@@ -17,15 +17,12 @@ class DemandeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|exists:users,username'
-        ]);
-
-        $user = User::where('username', $request->username)->firstOrFail();
+        $user = $request->user();
 
         $demande = new Demande();
         $demande->dateDem = now();
         $demande->idProfesseur = $user->idProfesseur;
+        $demande->status = 'pending';
         $demande->save();
 
         $request->session()->put('demande_id', $demande->idDemande);

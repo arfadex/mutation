@@ -1,66 +1,287 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Système de Mutation des Enseignants
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un système moderne de gestion des demandes de mutation des enseignants, développé avec Laravel 12, offrant une interface intuitive, un mode sombre, et un support PWA complet.
 
-## About Laravel
+## 🎯 Concept du Système
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ce système permet aux enseignants de soumettre des demandes de mutation vers différents lycées, avec un système de priorité et de gestion administrative complète. Les administrateurs peuvent examiner, approuver ou rejeter les demandes, tout en ayant accès à des tableaux de bord détaillés et des analytiques.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Fonctionnalités Principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **🔐 Authentification sécurisée** avec système de rôles (Enseignant/Admin)
+- **📱 Interface responsive** optimisée pour mobile et desktop
+- **🌙 Mode sombre** avec basculement en temps réel
+- **📲 Support PWA** pour installation sur Android et iOS
+- **👨‍💼 Tableau de bord administrateur** avec gestion complète des demandes
+- **📊 Analytiques avancées** et statistiques en temps réel
+- **🎨 Design moderne** avec animations fluides
 
-## Learning Laravel
+## 🚀 Installation et Configuration
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prérequis
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **PHP 8.2+**
+- **Composer**
+- **Node.js 18+** et npm
+- **MySQL 8.0+** ou **PostgreSQL 13+**
+- **Git**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Installation
 
-## Laravel Sponsors
+1. **Cloner le repository**
+   ```bash
+   git clone <repository-url>
+   cd mutation
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2. **Installer les dépendances PHP**
+   ```bash
+   composer install
+   ```
 
-### Premium Partners
+3. **Installer les dépendances Node.js**
+   ```bash
+   npm install
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. **Configuration de l'environnement**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Contributing
+5. **Configuration de la base de données**
+   
+   Éditez le fichier `.env` et configurez votre base de données :
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=mutation
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. **Exécution des migrations et seeders**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-## Code of Conduct
+7. **Compilation des assets**
+   ```bash
+   npm run dev
+   # ou pour la production
+   npm run build
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+8. **Démarrage du serveur**
+   ```bash
+   php artisan serve
+   ```
 
-## Security Vulnerabilities
+L'application sera accessible à l'adresse : `http://localhost:8000`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 👥 Comptes par Défaut
 
-## License
+### Administrateur
+- **Username:** `admin`
+- **Password:** `admin123`
+- **Email:** `admin@mutation.ma`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Enseignants de Test
+- **Username:** `ahmed.alami` | **Password:** `password123`
+- **Username:** `fatima.benali` | **Password:** `password123`
+- **Username:** `mohammed.chraibi` | **Password:** `password123`
+
+## 🎨 Fonctionnalités
+
+### Pour les Enseignants
+
+1. **Connexion sécurisée** avec username/mot de passe
+2. **Création de demandes** de mutation
+3. **Sélection de lycées** avec système de priorité (ordre 1, 2, 3...)
+4. **Suivi des demandes** et historique des mutations
+5. **Interface responsive** adaptée aux mobiles
+
+### Pour les Administrateurs
+
+1. **Tableau de bord complet** avec statistiques en temps réel
+2. **Gestion des demandes** (approbation/rejet avec notes)
+3. **Gestion des enseignants** et de leurs profils
+4. **Analytiques avancées** et rapports
+5. **Filtres et recherche** avancés
+
+### Fonctionnalités Techniques
+
+- **Mode sombre/clair** avec persistance des préférences
+- **PWA (Progressive Web App)** avec installation native
+- **Service Worker** pour le cache et l'offline
+- **Design responsive** avec Bootstrap 5.3
+- **Animations CSS** et transitions fluides
+- **API REST** pour les interactions dynamiques
+
+## 📱 Support PWA
+
+L'application est entièrement compatible PWA et peut être installée sur :
+
+- **Android** : Via Chrome ou navigateurs compatibles
+- **iOS** : Via Safari (iOS 11.3+)
+- **Desktop** : Via Chrome, Edge, Firefox
+
+### Fonctionnalités PWA
+
+- Installation native sur l'écran d'accueil
+- Fonctionnement hors ligne (cache des ressources)
+- Notifications push (prévu pour les futures versions)
+- Interface native avec barre d'adresse masquée
+
+## 🎨 Thèmes et Personnalisation
+
+### Mode Sombre
+
+- **Activation automatique** par défaut
+- **Basculement en temps réel** via le bouton dans la navbar
+- **Persistance** des préférences utilisateur
+- **Thème adaptatif** pour tous les composants
+
+### Palette de Couleurs
+
+- **Primaire:** #5dd0ff (Bleu cyan)
+- **Sombre:** #0d1b2a (Bleu marine)
+- **Surface sombre:** #1a2332
+- **Texte clair:** #e2e8f0
+
+## 🗄️ Structure de la Base de Données
+
+### Tables Principales
+
+- **`users`** : Profils des enseignants et administrateurs
+- **`regions`** : Régions administratives
+- **`academies`** : Académies régionales
+- **`lycees`** : Établissements scolaires
+- **`demandes`** : Demandes de mutation
+- **`detail_demandes`** : Détails des lycées demandés par ordre de priorité
+
+### Relations
+
+- Un enseignant peut avoir plusieurs demandes
+- Une demande peut contenir plusieurs lycées (avec ordre de priorité)
+- Les lycées appartiennent à des académies
+- Les académies appartiennent à des régions
+
+## 🔧 Développement
+
+### Structure du Projet
+
+```
+mutation/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── AdminController.php      # Gestion administrative
+│   │   ├── DemandeController.php    # Gestion des demandes
+│   │   └── HomeController.php       # Page d'accueil
+│   ├── Models/
+│   │   ├── User.php                 # Modèle utilisateur
+│   │   ├── Demande.php              # Modèle demande
+│   │   └── ...
+│   └── Http/Middleware/
+│       └── DarkModeMiddleware.php   # Gestion du mode sombre
+├── resources/
+│   ├── views/
+│   │   ├── admin/                   # Vues administrateur
+│   │   ├── demande/                 # Vues demandes
+│   │   └── layouts/
+│   │       └── app.blade.php        # Layout principal
+│   ├── sass/
+│   │   └── app.scss                 # Styles avec mode sombre
+│   └── js/
+│       └── app.js                   # JavaScript
+├── public/
+│   ├── manifest.json                # Manifest PWA
+│   └── sw.js                        # Service Worker
+└── database/
+    ├── migrations/                  # Migrations de base
+    └── seeders/                     # Données de test
+```
+
+### Commandes Utiles
+
+```bash
+# Développement
+php artisan serve
+npm run dev
+
+# Production
+npm run build
+php artisan optimize
+
+# Base de données
+php artisan migrate:fresh --seed
+php artisan db:seed
+
+# Cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+```
+
+## 🚀 Déploiement
+
+### Production
+
+1. **Configuration serveur**
+   ```bash
+   composer install --optimize-autoloader --no-dev
+   npm run build
+   php artisan optimize
+   ```
+
+2. **Variables d'environnement**
+   - Configurez `APP_ENV=production`
+   - Définissez `APP_DEBUG=false`
+   - Configurez votre base de données de production
+
+3. **Permissions**
+   ```bash
+   chmod -R 755 storage bootstrap/cache
+   ```
+
+## 📊 Monitoring et Logs
+
+- **Logs Laravel** : `storage/logs/laravel.log`
+- **Cache** : Gestion automatique via Laravel
+- **Sessions** : Stockage en base de données
+- **Erreurs** : Affichage adaptatif selon l'environnement
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créez une branche feature (`git checkout -b feature/AmazingFeature`)
+3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrez une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+
+## 🆘 Support
+
+Pour toute question ou problème :
+
+1. Consultez la documentation Laravel
+2. Vérifiez les issues existantes
+3. Créez une nouvelle issue avec les détails du problème
+
+## 🔮 Roadmap
+
+- [ ] Notifications push
+- [ ] API mobile native
+- [ ] Système de messagerie interne
+- [ ] Export PDF des demandes
+- [ ] Intégration calendrier
+- [ ] Multi-langue (Arabe/Français)
+
+---
+
+**Développé avec ❤️ en Laravel 12**

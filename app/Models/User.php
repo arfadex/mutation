@@ -28,6 +28,7 @@ class User extends Authenticatable
         'username',
         'password',
         'points',
+        'is_admin',
     ];
 
     protected $primaryKey = 'idProfesseur';
@@ -40,6 +41,11 @@ class User extends Authenticatable
     public function demandes()
     {
         return $this->hasMany(Demande::class, 'idProfesseur');
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin == 1;
     }
 
     /**
