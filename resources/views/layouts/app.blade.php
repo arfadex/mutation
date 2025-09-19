@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mutation facilite le suivi des demandes et des mutations pour les établissements scolaires.">
     <script src="{{ asset('jquery.js') }}"></script>
 
     <!-- CSRF Token -->
@@ -16,37 +17,14 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    {{-- Css --}}
-    <style>
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-    
-        main {
-            flex: 1;
-        }
-    
-        .green {
-            color: rgb(45, 231, 45);
-        }
-        .black {
-            color: black;
-        }
-        .red {
-            color: red;
-        }
-    </style>
-    {{-- Css --}}
+    @stack('styles')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark text-white shadow-sm" style="background-color: black;">
+    <div id="app" class="d-flex flex-column min-vh-100">
+        <nav class="navbar navbar-expand-md navbar-dark text-white shadow-sm app-navbar">
             <div class="container">
-                <a class="navbar-brand" style="font-size: 20px;" href="{{ url('home') }}">
-                    {{-- {{ config('app.name', 'Laravel') }} --}}
-                    Mutation 
+                <a class="navbar-brand fw-semibold tracking-wide" href="{{ url('home') }}">
+                    Mutation
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -98,9 +76,23 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5 flex-grow-1">
             @yield('content')
         </main>
     </div>
+    <footer class="app-footer py-4 mt-auto">
+        <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
+            <div>
+                <span class="fw-semibold">Mutation</span>
+                <span class="text-white-50">&mdash; Simplifiez vos démarches administratives.</span>
+            </div>
+            <div class="d-flex gap-3">
+                <a class="footer-link" href="{{ route('demande.create') }}">Nouvelle demande</a>
+                <a class="footer-link" href="{{ route('demande.latestMutation') }}">Dernières mutations</a>
+                <a class="footer-link" href="{{ route('service.test') }}">Services</a>
+            </div>
+        </div>
+    </footer>
+    @stack('scripts')
 </body>
 </html>
